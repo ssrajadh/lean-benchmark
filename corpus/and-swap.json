@@ -1,0 +1,13 @@
+{
+  "id": "and-swap",
+  "source": "hand-written smoke test",
+  "difficulty": "easy",
+  "tags": ["logic", "and", "commutativity"],
+  "description": "Prove that conjunction is commutative: if a ∧ b holds, then b ∧ a holds.",
+  "imports": ["Mathlib"],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem And_swap (a b : Prop) : a ∧ b → b ∧ a",
+  "expected_name": "And_swap",
+  "notes": "Oracle lemmas from LeanCopilot select_premises (k=10): and_comm, and_assoc, and_left_comm, imp_and, forall_and, and_congr_left_iff, and_congr_right_iff, and_right_comm, And.comm, and_and_and_comm."
+}

@@ -28,6 +28,7 @@ class Obligation(BaseModel):
     preamble: str = ""
     statement: str
     expected_name: str
+    oracle_premises: list[str] = Field(default_factory=list)
     notes: str = ""
 
     @field_validator("id")
