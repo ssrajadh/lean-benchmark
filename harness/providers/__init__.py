@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import time
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict
@@ -32,16 +31,16 @@ def generate(
         from harness.providers.gemini import _generate
 
         return _generate(model, prompt, system, max_tokens, temperature, seed)
-    elif model.startswith("gpt-"):
-        from harness.providers.openai import _generate
+    elif model.startswith("qwen/") or model.startswith("qwen-"):
+        from harness.providers.nim import _generate
 
         return _generate(model, prompt, system, max_tokens, temperature, seed)
-    elif model.startswith("deepseek-ai/"):
-        from harness.providers.deepseek import _generate
+    elif model.startswith("deepseek/") or model.startswith("accounts/fireworks/"):
+        from harness.providers.fireworks import _generate
 
         return _generate(model, prompt, system, max_tokens, temperature, seed)
     else:
         raise ValueError(
             f"Unknown model prefix: {model!r}. "
-            "Expected gemini-*, gpt-*, or deepseek-ai/*."
+            "Supported prefixes: gemini-*, qwen/*, qwen-*, deepseek/*, accounts/fireworks/*."
         )

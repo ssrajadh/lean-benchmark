@@ -1,4 +1,4 @@
-"""Google Gemini provider via google-genai SDK."""
+"""Google Gemini provider via google-genai SDK (AI Studio free tier)."""
 
 from __future__ import annotations
 
@@ -8,18 +8,23 @@ import time
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from google.genai.errors import ClientError, ServerError
 from tenacity import (
     retry,
-    retry_if_exception_type,
+    retry_if_exception,
     stop_after_attempt,
     wait_exponential,
 )
 
 from harness.providers import ProviderResponse
+from harness.providers.rate_limit import RateLimiter
 
 load_dotenv()
 
 _client: genai.Client | None = None
+_limiter = RateLimiter(min_interval=8.0)
+
+DEFAULT_MODEL = "gemini-3.5-flash"
 
 
 def _get_client() -> genai.Client:
@@ -32,13 +37,57 @@ def _get_client() -> genai.Client:
     return _client
 
 
+def _is_daily_limit(exc: BaseException) -> bool:
+    msg = str(exc).lower()
+    return "resource_exhausted" in msg and ("per day" in msg or "daily" in msg)
+
+
+def _should_retry(exc: BaseException) -> bool:
+    if isinstance(exc, (TimeoutError, ConnectionError)):
+        return True
+    if isinstance(exc, ServerError):
+        return True
+    if isinstance(exc, ClientError):
+        if _is_daily_limit(exc):
+            return False
+        if "429" in str(exc) or "rate" in str(exc).lower():
+            return True
+    return False
+
+
+def _generate(
+    model: str,
+    prompt: str,
+    system: str | None,
+    max_tokens: int,
+    temperature: float,
+    seed: int | None,
+) -> ProviderResponse:
+    _limiter.acquire()
+
+    try:
+        return _call_api(model, prompt, system, max_tokens, temperature, seed)
+    except Exception as exc:
+        if _is_daily_limit(exc):
+            return ProviderResponse(
+                text="",
+                raw={},
+                model=model,
+                latency_ms=0,
+                input_tokens=0,
+                output_tokens=0,
+                error="daily_limit_exhausted",
+            )
+        raise
+
+
 @retry(
-    retry=retry_if_exception_type((TimeoutError, ConnectionError)),
-    wait=wait_exponential(multiplier=1, min=2, max=60),
-    stop=stop_after_attempt(5),
+    retry=retry_if_exception(_should_retry),
+    wait=wait_exponential(multiplier=1, min=30, max=300),
+    stop=stop_after_attempt(6),
     reraise=True,
 )
-def _generate(
+def _call_api(
     model: str,
     prompt: str,
     system: str | None,
