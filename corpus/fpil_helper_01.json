@@ -1,0 +1,14 @@
+{
+  "id": "fpil_helper_01",
+  "source": "fp-lean/examples/Examples/ProgramsProofs/Inequalities.lean",
+  "difficulty": "easy",
+  "tags": ["nat", "inequality", "induction"],
+  "description": "Prove that if n ≤ m, then n ≤ m + 1, by induction on the proof of n ≤ m.",
+  "imports": ["Mathlib"],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem Nat.le_succ_of_le {n m : Nat} (h : n ≤ m) : n ≤ m + 1",
+  "expected_name": "Nat.le_succ_of_le",
+  "oracle_premises": [],
+  "notes": "From fp-lean examples/Examples/ProgramsProofs/Inequalities.lean lines 475-480. Ground-truth proof: induction h with | refl => constructor; constructor | step => constructor; assumption"
+}

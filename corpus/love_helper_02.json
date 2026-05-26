@@ -1,0 +1,14 @@
+{
+  "id": "love_helper_02",
+  "source": "logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean",
+  "difficulty": "easy",
+  "tags": ["tree", "mirror", "induction", "helper_lemma"],
+  "description": "Prove that mirroring a binary tree twice yields the original tree.",
+  "imports": ["Mathlib"],
+  "open_namespaces": [],
+  "preamble": "def mirror {α : Type} : Tree α → Tree α\n  | Tree.nil => Tree.nil\n  | Tree.node a l r => Tree.node a (mirror r) (mirror l)",
+  "statement": "theorem mirror_mirror {α : Type} (t : Tree α) :\n    mirror (mirror t) = t",
+  "expected_name": "mirror_mirror",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 440-445. Ground-truth proof: induction t with | nil => rfl | node a l r ih_l ih_r => simp [mirror, ih_l, ih_r]"
+}

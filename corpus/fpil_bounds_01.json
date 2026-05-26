@@ -1,0 +1,14 @@
+{
+  "id": "fpil_bounds_01",
+  "source": "fp-lean/examples/Examples/ProgramsProofs/Inequalities.lean",
+  "difficulty": "medium",
+  "tags": ["nat", "subtraction", "bounds", "array"],
+  "description": "Prove that for natural numbers a and i, if i < a, then a - (i + 1) < a - i.",
+  "imports": ["Mathlib"],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem Nat.sub_succ_lt_self (a i : Nat) (h : i < a) : a - (i + 1) < a - i",
+  "expected_name": "Nat.sub_succ_lt_self",
+  "oracle_premises": [],
+  "notes": "From fp-lean examples/Examples/ProgramsProofs/Inequalities.lean lines 887-893. Ground-truth proof: rw [Nat.add_succ, Nat.sub_succ]; apply Nat.pred_lt; apply Nat.not_eq_zero_of_lt; apply Nat.zero_lt_sub_of_lt; assumption"
+}

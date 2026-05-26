@@ -1,0 +1,14 @@
+{
+  "id": "fpil_termination_01",
+  "source": "fp-lean/examples/Examples/ProgramsProofs/Inequalities.lean",
+  "difficulty": "medium",
+  "tags": ["list", "termination", "length", "induction"],
+  "description": "Prove that splitting a list produces halves whose lengths are both at most the length of the original list.",
+  "imports": ["Mathlib"],
+  "open_namespaces": [],
+  "preamble": "def splitList (lst : List α) : (List α × List α) :=\n  match lst with\n  | [] => ([], [])\n  | x :: xs =>\n    let (a, b) := splitList xs\n    (x :: b, a)",
+  "statement": "theorem splitList_shorter_le (lst : List α) :\n    (splitList lst).fst.length ≤ lst.length ∧\n      (splitList lst).snd.length ≤ lst.length",
+  "expected_name": "splitList_shorter_le",
+  "oracle_premises": [],
+  "notes": "From fp-lean examples/Examples/ProgramsProofs/Inequalities.lean lines 563-567. Ground-truth proof: fun_induction splitList <;> grind"
+}

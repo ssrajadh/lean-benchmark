@@ -1,4 +1,4 @@
-"""DeepSeek-Prover V2 on Fireworks AI (OpenAI-compatible)."""
+"""DeepSeek-V4-Pro on Fireworks AI (OpenAI-compatible)."""
 
 from __future__ import annotations
 
