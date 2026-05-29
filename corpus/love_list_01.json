@@ -1,0 +1,20 @@
+{
+  "id": "love_list_01",
+  "source": "logical_verification_2025/lean/LoVe/LoVe04_ForwardProofs_Demo.lean",
+  "difficulty": "medium",
+  "tags": [
+    "list",
+    "reverse",
+    "append",
+    "induction"
+  ],
+  "description": "Prove that reversing a concatenation equals the concatenation of the reversed lists in opposite order.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "def reverse {α : Type} : List α → List α\n  | []      => []\n  | x :: xs => reverse xs ++ [x]",
+  "statement": "theorem reverse_append {α : Type} :\n    ∀xs ys : List α,\n      reverse (xs ++ ys) = reverse ys ++ reverse xs",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe04_ForwardProofs_Demo.lean lines 394-398."
+}

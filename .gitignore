@@ -19,9 +19,17 @@ __pycache__/
 
 # Results & caches (keep dir, ignore contents)
 results/*.jsonl
+results/archive/
 benchmark/results/*.jsonl
 .cache/
 *.cache
+
+# Generated analysis output
+analysis/output/
+
+# Atomic-write & backup junk
+*.tmp.*
+*.bak
 
 # Lean project (user-managed locally)
 lean_project/
@@ -37,3 +45,5 @@ Thumbs.db
 .claude/
 
 sources/
+
+notes/

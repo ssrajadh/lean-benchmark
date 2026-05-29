@@ -21,6 +21,9 @@ Outcome = Literal[
     "unknown_identifier",
     "type_mismatch",
     "contains_sorry",
+    "termination_failure",
+    "tactic_failed",
+    "simp_recursion",
     "other_failure",
 ]
 
@@ -40,14 +43,28 @@ def _classify_outcome(stdout: str, stderr: str, returncode: int) -> Outcome:
     if returncode == 0 and "error" not in combined.lower():
         return "pass"
 
+    if re.search(r"unexpected token|unknown command|unknown tactic|Invalid name after", combined):
+        return "compile_error"
+    if re.search(r"unknown identifier|unknown constant|unknownIdentifier", combined, re.IGNORECASE):
+        return "unknown_identifier"
+    if re.search(r"type mismatch|application type mismatch", combined, re.IGNORECASE):
+        return "type_mismatch"
+    if re.search(r"fail to show termination", combined):
+        return "termination_failure"
+    if re.search(r"`simp(?:_all)?`.*maximum recursion depth", combined, re.DOTALL):
+        return "simp_recursion"
     if re.search(r"unsolved goals", combined):
         return "unsolved_goals"
-    if re.search(r"unknown identifier", combined):
-        return "unknown_identifier"
-    if re.search(r"type mismatch", combined):
-        return "type_mismatch"
-    if re.search(r"(unknown command|expected|unexpected token|expected token)", combined):
-        return "compile_error"
+    if re.search(
+        r"tactic .* failed"
+        r"|made no progress"
+        r"|omega could not prove"
+        r"|Case tag .* not found"
+        r"|Alternative .* is not needed"
+        r"|No goals to be solved",
+        combined, re.IGNORECASE,
+    ):
+        return "tactic_failed"
 
     return "other_failure"
 

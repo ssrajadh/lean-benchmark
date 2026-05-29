@@ -1,20 +1,20 @@
 {
-  "id": "love_helper_02",
+  "id": "love_tree_01",
   "source": "logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean",
   "difficulty": "easy",
   "tags": [
     "tree",
     "mirror",
-    "induction",
-    "helper_lemma"
+    "iff",
+    "cases"
   ],
-  "description": "Prove that mirroring a binary tree twice yields the original tree.",
+  "description": "Prove that mirroring a tree yields nil if and only if the original tree is nil.",
   "imports": [
     "Mathlib"
   ],
   "open_namespaces": [],
   "preamble": "def mirror {α : Type} : Tree α → Tree α\n  | Tree.nil => Tree.nil\n  | Tree.node a l r => Tree.node a (mirror r) (mirror l)",
-  "statement": "theorem mirror_mirror {α : Type} (t : Tree α) :\n    mirror (mirror t) = t",
+  "statement": "theorem mirror_Eq_nil_Iff {α : Type} :\n    ∀t : Tree α, mirror t = Tree.nil ↔ t = Tree.nil",
   "oracle_premises": [],
-  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 440-445."
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 463-466."
 }

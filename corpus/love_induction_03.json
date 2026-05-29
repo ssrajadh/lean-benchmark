@@ -1,0 +1,19 @@
+{
+  "id": "love_induction_03",
+  "source": "logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "list",
+    "injection",
+    "constructor"
+  ],
+  "description": "Prove that if x :: xs = y :: ys, then x = y and xs = ys (injectivity of list cons).",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem injection_example {α : Type} (x y : α) (xs ys : List α)\n      (h : x :: xs = y :: ys) :\n    x = y ∧ xs = ys",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 292-297."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "love_pred_01",
+  "source": "logical_verification_2025/lean/LoVe/LoVe06_InductivePredicates_Demo.lean",
+  "difficulty": "medium",
+  "tags": [
+    "inductive_predicate",
+    "even",
+    "iff",
+    "cases"
+  ],
+  "description": "Prove that n is even if and only if n = 0 or there exists m such that n = m + 2 and m is even.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "inductive LoveEven : ℕ → Prop where\n  | zero    : LoveEven 0\n  | add_two : ∀k : ℕ, LoveEven k → LoveEven (k + 2)",
+  "statement": "theorem LoveEven_Iff (n : ℕ) :\n    LoveEven n ↔ n = 0 ∨ (∃m : ℕ, n = m + 2 ∧ LoveEven m)",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe06_InductivePredicates_Demo.lean lines 338-357. Even is namespaced to avoid conflict with Mathlib's Even. The harness should append 'end LoveEven' after the proof."
+}

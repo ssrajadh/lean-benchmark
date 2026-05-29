@@ -1,4 +1,4 @@
-"""Qwen on NVIDIA NIM (OpenAI-compatible)."""
+"""OpenAI provider."""
 
 from __future__ import annotations
 
@@ -22,18 +22,16 @@ load_dotenv()
 _client: openai.OpenAI | None = None
 _limiter = RateLimiter(min_interval=0.0)
 
-_BASE_URL = "https://integrate.api.nvidia.com/v1"
-
-DEFAULT_MODEL = "qwen/qwen3.5-397b-a17b"
+DEFAULT_MODEL = "gpt-5.4-mini"
 
 
 def _get_client() -> openai.OpenAI:
     global _client
     if _client is None:
-        api_key = os.environ.get("NVIDIA_API_KEY")
+        api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key:
-            raise RuntimeError("NVIDIA_API_KEY not set")
-        _client = openai.OpenAI(api_key=api_key, base_url=_BASE_URL)
+            raise RuntimeError("OPENAI_API_KEY not set")
+        _client = openai.OpenAI(api_key=api_key)
     return _client
 
 
@@ -95,7 +93,7 @@ def _call_api(
     response = client.chat.completions.create(
         model=model,
         messages=messages,
-        max_tokens=max_tokens,
+        max_completion_tokens=max_tokens,
         temperature=temperature,
         seed=seed,
     )

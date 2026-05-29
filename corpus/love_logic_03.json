@@ -1,0 +1,19 @@
+{
+  "id": "love_logic_03",
+  "source": "logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "logic",
+    "implication",
+    "modus_ponens"
+  ],
+  "description": "Prove modus ponens: given (a → b) and a, conclude b.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem modus_ponens (a b : Prop) : (a → b) → a → b",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean lines 212-217."
+}

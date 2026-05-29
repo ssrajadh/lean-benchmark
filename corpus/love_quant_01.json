@@ -1,0 +1,20 @@
+{
+  "id": "love_quant_01",
+  "source": "logical_verification_2025/lean/LoVe/LoVe04_ForwardProofs_Demo.lean",
+  "difficulty": "medium",
+  "tags": [
+    "logic",
+    "forall",
+    "iff",
+    "one_point"
+  ],
+  "description": "Prove the one-point rule for universal quantification: (∀x, x = t → P x) ↔ P t.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem Forall.one_point {α : Type} (t : α) (P : α → Prop) :\n    (∀x, x = t → P x) ↔ P t",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe04_ForwardProofs_Demo.lean lines 143-157."
+}

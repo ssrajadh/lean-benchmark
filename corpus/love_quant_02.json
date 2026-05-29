@@ -1,0 +1,20 @@
+{
+  "id": "love_quant_02",
+  "source": "logical_verification_2025/lean/LoVe/LoVe04_ForwardProofs_Demo.lean",
+  "difficulty": "medium",
+  "tags": [
+    "logic",
+    "exists",
+    "iff",
+    "one_point"
+  ],
+  "description": "Prove the one-point rule for existential quantification: (∃x, x = t ∧ P x) ↔ P t.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem Exists.one_point {α : Type} (t : α) (P : α → Prop) :\n    (∃x : α, x = t ∧ P x) ↔ P t",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe04_ForwardProofs_Demo.lean lines 165-187."
+}

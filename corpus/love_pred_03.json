@@ -1,0 +1,20 @@
+{
+  "id": "love_pred_03",
+  "source": "logical_verification_2025/lean/LoVe/LoVe06_InductivePredicates_Demo.lean",
+  "difficulty": "hard",
+  "tags": [
+    "inductive_predicate",
+    "palindrome",
+    "reverse",
+    "induction"
+  ],
+  "description": "Prove that the reverse of a palindrome is also a palindrome.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "def reverse {α : Type} : List α → List α\n  | []      => []\n  | x :: xs => reverse xs ++ [x]\n\ntheorem reverse_append {α : Type} :\n    ∀xs ys : List α,\n      reverse (xs ++ ys) = reverse ys ++ reverse xs\n  | [],      ys => by simp [reverse]\n  | x :: xs, ys => by simp [reverse, reverse_append xs]\n\ninductive Palindrome {α : Type} : List α → Prop where\n  | nil : Palindrome []\n  | single (x : α) : Palindrome [x]\n  | sandwich (x : α) (xs : List α) (hxs : Palindrome xs) :\n    Palindrome ([x] ++ xs ++ [x])",
+  "statement": "theorem Palindrome_reverse {α : Type} (xs : List α)\n      (hxs : Palindrome xs) :\n    Palindrome (reverse xs)",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe06_InductivePredicates_Demo.lean lines 454-463."
+}

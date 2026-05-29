@@ -2,13 +2,19 @@
   "id": "love_helper_01",
   "source": "logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean",
   "difficulty": "easy",
-  "tags": ["list", "map", "induction", "helper_lemma"],
+  "tags": [
+    "list",
+    "map",
+    "induction",
+    "helper_lemma"
+  ],
   "description": "Prove that mapping the identity function over a list returns the original list.",
-  "imports": ["Mathlib"],
+  "imports": [
+    "Mathlib"
+  ],
   "open_namespaces": [],
   "preamble": "def map {α β : Type} (f : α → β) : List α → List β\n  | [] => []\n  | x :: xs => f x :: map f xs",
   "statement": "theorem map_ident {α : Type} (xs : List α) :\n    map (fun x ↦ x) xs = xs",
-  "expected_name": "map_ident",
   "oracle_premises": [],
-  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 316-322. Ground-truth proof: induction xs with | nil => rfl | cons x xs' ih => simp [map, ih]"
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 316-322."
 }

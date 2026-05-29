@@ -1,0 +1,20 @@
+{
+  "id": "love_induction_02",
+  "source": "logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "list",
+    "map",
+    "composition",
+    "induction"
+  ],
+  "description": "Prove that mapping g after mapping f is the same as mapping the composition g ∘ f.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "def map {α β : Type} (f : α → β) : List α → List β\n  | [] => []\n  | x :: xs => f x :: map f xs",
+  "statement": "theorem map_comp {α β γ : Type} (f : α → β) (g : β → γ)\n      (xs : List α) :\n    map g (map f xs) = map (fun x ↦ g (f x)) xs",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 323-329."
+}

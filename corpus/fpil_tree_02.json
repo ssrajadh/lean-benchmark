@@ -1,0 +1,21 @@
+{
+  "id": "fpil_tree_02",
+  "source": "fp-lean/examples/Examples/Induction.lean",
+  "difficulty": "medium",
+  "tags": [
+    "tree",
+    "graft",
+    "count",
+    "induction",
+    "arithmetic"
+  ],
+  "description": "Prove that grafting a new branch onto a binary tree produces a tree whose count is the sum of the two counts.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "inductive BinTree (α : Type) where\n  | leaf : BinTree α\n  | branch : BinTree α → α → BinTree α → BinTree α\n\ndef BinTree.count : BinTree α → Nat\n  | .leaf => 0\n  | .branch l _ r => 1 + l.count + r.count\n\ndef BinTree.graftLeft (root newBranch : BinTree α) : BinTree α :=\n  match root with\n  | .leaf => newBranch\n  | .branch l x r => .branch (l.graftLeft newBranch) x r",
+  "statement": "theorem BinTree.count_graftLeft_eq_sum_count (root newBranch : BinTree α) :\n    (root.graftLeft newBranch).count = root.count + newBranch.count",
+  "oracle_premises": [],
+  "notes": "From fp-lean/examples/Examples/Induction.lean lines 530-532."
+}

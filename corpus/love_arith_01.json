@@ -1,0 +1,20 @@
+{
+  "id": "love_arith_01",
+  "source": "logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "nat",
+    "arithmetic",
+    "commutativity",
+    "associativity"
+  ],
+  "description": "Prove that a + b + c = c + b + a for natural numbers, using associativity and commutativity of addition.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem abc_Eq_cba (a b c : ℕ) : a + b + c = c + b + a",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean lines 287-289."
+}

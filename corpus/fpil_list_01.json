@@ -1,0 +1,20 @@
+{
+  "id": "fpil_list_01",
+  "source": "fp-lean/examples/Examples/Induction.lean",
+  "difficulty": "easy",
+  "tags": [
+    "list",
+    "append",
+    "associativity",
+    "induction"
+  ],
+  "description": "Prove that list append is associative: xs ++ (ys ++ zs) = (xs ++ ys) ++ zs.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem append_assoc_manual (xs ys zs : List α) :\n    xs ++ (ys ++ zs) = (xs ++ ys) ++ zs",
+  "oracle_premises": [],
+  "notes": "From fp-lean/examples/Examples/Induction.lean lines 305-306. Renamed to append_assoc' to avoid conflict with Mathlib's List.append_assoc."
+}

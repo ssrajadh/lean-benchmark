@@ -27,7 +27,6 @@ class Obligation(BaseModel):
     open_namespaces: list[str] = Field(default_factory=list)
     preamble: str = ""
     statement: str
-    expected_name: str
     oracle_premises: list[str] = Field(default_factory=list)
     notes: str = ""
 

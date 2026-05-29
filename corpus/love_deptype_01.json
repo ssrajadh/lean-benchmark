@@ -1,0 +1,20 @@
+{
+  "id": "love_deptype_01",
+  "source": "logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean",
+  "difficulty": "medium",
+  "tags": [
+    "dependent_types",
+    "vector",
+    "length",
+    "induction"
+  ],
+  "description": "Prove that converting a length-indexed vector to a list preserves the length.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "inductive Vec (α : Type) : ℕ → Type where\n  | nil                                : Vec α 0\n  | cons (a : α) {n : ℕ} (v : Vec α n) : Vec α (n + 1)\n\ndef listOfVec {α : Type} : ∀{n : ℕ}, Vec α n → List α\n  | _, Vec.nil      => []\n  | _, Vec.cons a v => a :: listOfVec v",
+  "statement": "theorem length_listOfVec {α : Type} :\n    ∀(n : ℕ) (v : Vec α n), List.length (listOfVec v) = n",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 487-491."
+}

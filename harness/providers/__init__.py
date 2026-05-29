@@ -27,8 +27,8 @@ def generate(
     temperature: float = 0.0,
     seed: int | None = None,
 ) -> ProviderResponse:
-    if model.startswith("gemini-"):
-        from harness.providers.gemini import _generate
+    if model.startswith("gpt-"):
+        from harness.providers.openai import _generate
 
         return _generate(model, prompt, system, max_tokens, temperature, seed)
     elif model.startswith("qwen/") or model.startswith("qwen-"):
@@ -42,5 +42,5 @@ def generate(
     else:
         raise ValueError(
             f"Unknown model prefix: {model!r}. "
-            "Supported prefixes: gemini-*, qwen/*, qwen-*, deepseek/*, accounts/fireworks/*."
+            "Supported prefixes: gpt-*, qwen/*, qwen-*, deepseek/*, accounts/fireworks/*."
         )

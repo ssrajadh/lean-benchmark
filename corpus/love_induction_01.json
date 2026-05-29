@@ -1,0 +1,20 @@
+{
+  "id": "love_induction_01",
+  "source": "logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "nat",
+    "induction",
+    "successor",
+    "inequality"
+  ],
+  "description": "Prove that the successor of a natural number is never equal to itself.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem Nat.succ_neq_self (n : ℕ) : Nat.succ n ≠ n",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 68-73."
+}

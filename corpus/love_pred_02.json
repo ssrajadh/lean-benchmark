@@ -1,0 +1,19 @@
+{
+  "id": "love_pred_02",
+  "source": "logical_verification_2025/lean/LoVe/LoVe06_InductivePredicates_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "inductive_predicate",
+    "sorted",
+    "negation"
+  ],
+  "description": "Prove that the list [17, 13] is not sorted.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "inductive Sorted : List ℕ → Prop where\n  | nil : Sorted []\n  | single (x : ℕ) : Sorted [x]\n  | two_or_more (x y : ℕ) {zs : List ℕ} (hle : x ≤ y)\n      (hsorted : Sorted (y :: zs)) :\n    Sorted (x :: y :: zs)",
+  "statement": "theorem Not_Sorted_17_13 : ¬ Sorted [17, 13]",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe06_InductivePredicates_Demo.lean lines 421-426."
+}

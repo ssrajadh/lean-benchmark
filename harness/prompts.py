@@ -32,7 +32,6 @@ def _format_context(ob: Obligation) -> str:
 
 def baseline_prompt(ob: Obligation) -> tuple[str, str]:
     user = (
-        f"{ob.description}\n\n"
         f"{_format_context(ob)}\n\n"
         "Replace `sorry` with a valid tactic proof. "
         "Respond with only the proof body in a fenced code block."
@@ -41,10 +40,7 @@ def baseline_prompt(ob: Obligation) -> tuple[str, str]:
 
 
 def oracle_prompt(ob: Obligation) -> tuple[str, str]:
-    user = (
-        f"{ob.description}\n\n"
-        f"{_format_context(ob)}\n\n"
-    )
+    user = f"{_format_context(ob)}\n\n"
 
     if ob.oracle_premises:
         lemmas = "\n".join(f"- `{p}`" for p in ob.oracle_premises)

@@ -2,13 +2,18 @@
   "id": "fpil_bounds_02",
   "source": "fp-lean/examples/Examples/ProgramsProofs/Inequalities.lean",
   "difficulty": "easy",
-  "tags": ["nat", "subtraction", "bounds"],
+  "tags": [
+    "nat",
+    "subtraction",
+    "bounds"
+  ],
   "description": "Prove that for natural numbers n and k, n - k ≤ n.",
-  "imports": ["Mathlib"],
+  "imports": [
+    "Mathlib"
+  ],
   "open_namespaces": [],
   "preamble": "",
   "statement": "theorem sub_le (n k : Nat) : n - k ≤ n",
-  "expected_name": "sub_le",
   "oracle_premises": [],
-  "notes": "From fp-lean examples/Examples/ProgramsProofs/Inequalities.lean lines 830-836. Ground-truth proof: induction k with | zero => simp | succ k' ih => calc n - Nat.succ k' ≤ n - k' := by apply Nat.pred_le; n - k' ≤ n := ih"
+  "notes": "From fp-lean examples/Examples/ProgramsProofs/Inequalities.lean lines 830-836."
 }

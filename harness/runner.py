@@ -44,9 +44,12 @@ def _sanitize(obj):
 
 def _extract_proof(text: str) -> str:
     m = re.search(r"```(?:lean)?\s*\n(.*?)```", text, re.DOTALL)
-    if m:
-        return m.group(1).strip()
-    return text.strip()
+    proof = m.group(1).strip() if m else text.strip()
+    if proof.startswith("by\n") or proof.startswith("by "):
+        proof = proof[3:]
+    elif proof == "by":
+        proof = ""
+    return proof
 
 
 def _cache_path(model: str, ph: str) -> Path:

@@ -3,13 +3,13 @@
 from rich.console import Console
 
 from harness.providers import generate
-from harness.providers.gemini import DEFAULT_MODEL as GEMINI_MODEL
+from harness.providers.openai import DEFAULT_MODEL as OPENAI_MODEL
 from harness.providers.nim import DEFAULT_MODEL as NIM_MODEL
 from harness.providers.fireworks import DEFAULT_MODEL as FIREWORKS_MODEL
 
 console = Console()
 
-MODELS = [GEMINI_MODEL, NIM_MODEL, FIREWORKS_MODEL]
+MODELS = [OPENAI_MODEL, NIM_MODEL, FIREWORKS_MODEL]
 PROMPT = "What is 2+2? Respond with only a single number."
 
 for model in MODELS:

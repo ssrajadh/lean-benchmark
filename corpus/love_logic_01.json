@@ -1,0 +1,19 @@
+{
+  "id": "love_logic_01",
+  "source": "logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "logic",
+    "or",
+    "commutativity"
+  ],
+  "description": "Prove that disjunction is commutative: if a ∨ b holds, then b ∨ a holds.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem Or_swap (a b : Prop) : a ∨ b → b ∨ a",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean lines 202-210."
+}

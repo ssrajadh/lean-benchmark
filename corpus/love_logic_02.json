@@ -1,0 +1,19 @@
+{
+  "id": "love_logic_02",
+  "source": "logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean",
+  "difficulty": "easy",
+  "tags": [
+    "logic",
+    "negation",
+    "double_negation"
+  ],
+  "description": "Prove double negation introduction: if a holds, then ¬¬a holds.",
+  "imports": [
+    "Mathlib"
+  ],
+  "open_namespaces": [],
+  "preamble": "",
+  "statement": "theorem Not_Not_intro (a : Prop) : a → ¬¬ a",
+  "oracle_premises": [],
+  "notes": "From logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean lines 219-224."
+}

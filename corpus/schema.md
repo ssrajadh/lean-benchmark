@@ -15,7 +15,7 @@ One JSON file per obligation under `corpus/*.json`. Each obligation describes a 
 | `open_namespaces` | string[] | no | Namespaces to `open` before the theorem. Defaults to `[]`. |
 | `preamble` | string | no | Arbitrary Lean code inserted after imports/opens and before the theorem (defs, `variable` declarations, helper lemmas). Defaults to `""`. |
 | `statement` | string | yes | The full theorem signature including the name, binders, and goal type, ending right before `:=`. E.g. `theorem foo (a : Nat) : a + 0 = a`. The harness appends `:= by\n  <model output>`. |
-| `expected_name` | string | yes | The declaration name introduced by `statement` (e.g. `foo`). Used by the verifier to confirm the proof closes the right goal. |
+| `oracle_premises` | string[] | no | Lemma names supplied as hints under the `oracle` prompt condition. Defaults to `[]`. |
 | `notes` | string | no | Author notes; ignored by the harness. Defaults to `""`. |
 
 ## Conventions
@@ -47,7 +47,6 @@ One JSON file per obligation under `corpus/*.json`. Each obligation describes a 
   "open_namespaces": [],
   "preamble": "",
   "statement": "theorem foo (a : Nat) : a + 0 = a",
-  "expected_name": "foo",
   "notes": "Closeable by `simp` or `rfl`. Used as a toolchain smoke test."
 }
 ```
