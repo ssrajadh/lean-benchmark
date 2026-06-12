@@ -16,6 +16,9 @@
   "open_namespaces": [],
   "preamble": "inductive BinTree (α : Type) where\n  | leaf : BinTree α\n  | branch : BinTree α → α → BinTree α → BinTree α\n\ndef BinTree.count : BinTree α → Nat\n  | .leaf => 0\n  | .branch l _ r => 1 + l.count + r.count\n\ndef BinTree.graftLeft (root newBranch : BinTree α) : BinTree α :=\n  match root with\n  | .leaf => newBranch\n  | .branch l x r => .branch (l.graftLeft newBranch) x r",
   "statement": "theorem BinTree.count_graftLeft_eq_sum_count (root newBranch : BinTree α) :\n    (root.graftLeft newBranch).count = root.count + newBranch.count",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "BinTree.graftLeft",
+    "BinTree.count"
+  ],
   "notes": "From fp-lean/examples/Examples/Induction.lean lines 530-532."
 }

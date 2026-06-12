@@ -15,6 +15,9 @@
   "open_namespaces": [],
   "preamble": "",
   "statement": "theorem append_assoc_manual (xs ys zs : List α) :\n    xs ++ (ys ++ zs) = (xs ++ ys) ++ zs",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "List.nil_append",
+    "List.cons_append"
+  ],
   "notes": "From fp-lean/examples/Examples/Induction.lean lines 305-306. Renamed to append_assoc' to avoid conflict with Mathlib's List.append_assoc."
 }

@@ -19,6 +19,7 @@ __pycache__/
 
 # Results & caches (keep dir, ignore contents)
 results/*.jsonl
+!results/run_clean_20260601.jsonl
 results/archive/
 benchmark/results/*.jsonl
 .cache/
@@ -40,6 +41,7 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+.zed/
 
 # Claude
 .claude/
@@ -47,3 +49,14 @@ Thumbs.db
 sources/
 
 notes/
+
+lean.*
+.latexmkrc
+*.md
+!README.md
+
+# Reference proofs (textbook-derived; used only by the provenance audit)
+proofs_explained/
+
+# Draft/scratch corpus files (finalized premises live in corpus/*.json)
+corpus/drafts/

@@ -15,6 +15,9 @@
   "open_namespaces": [],
   "preamble": "",
   "statement": "theorem Exists.one_point {α : Type} (t : α) (P : α → Prop) :\n    (∃x : α, x = t ∧ P x) ↔ P t",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "Iff.intro",
+    "Exists.intro"
+  ],
   "notes": "From logical_verification_2025/lean/LoVe/LoVe04_ForwardProofs_Demo.lean lines 165-187."
 }

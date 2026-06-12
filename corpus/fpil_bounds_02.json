@@ -14,6 +14,8 @@
   "open_namespaces": [],
   "preamble": "",
   "statement": "theorem sub_le (n k : Nat) : n - k ≤ n",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "Nat.pred_le"
+  ],
   "notes": "From fp-lean examples/Examples/ProgramsProofs/Inequalities.lean lines 830-836."
 }

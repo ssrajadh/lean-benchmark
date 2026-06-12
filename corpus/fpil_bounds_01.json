@@ -15,6 +15,10 @@
   "open_namespaces": [],
   "preamble": "",
   "statement": "theorem Nat.sub_succ_lt_self (a i : Nat) (h : i < a) : a - (i + 1) < a - i",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "Nat.add_succ",
+    "Nat.sub_succ",
+    "Nat.pred_lt"
+  ],
   "notes": "From fp-lean examples/Examples/ProgramsProofs/Inequalities.lean lines 887-893."
 }

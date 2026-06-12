@@ -15,6 +15,10 @@
   "open_namespaces": [],
   "preamble": "def State : Type :=\n  String → ℕ\n\ndef State.update (name : String) (val : ℕ) (s : State) : State :=\n  fun name' ↦ if name' = name then val else s name'\n\nmacro s:term \"[\" name:term \"↦\" val:term \"]\" : term =>\n  `(State.update $name $val $s)\n\ninductive Stmt : Type where\n  | skip       : Stmt\n  | assign     : String → (State → ℕ) → Stmt\n  | seq        : Stmt → Stmt → Stmt\n  | ifThenElse : (State → Prop) → Stmt → Stmt → Stmt\n  | whileDo    : (State → Prop) → Stmt → Stmt\n\ninfixr:90 \"; \" => Stmt.seq\n\ninductive BigStep : Stmt × State → State → Prop where\n  | skip (s) :\n    BigStep (Stmt.skip, s) s\n  | assign (x a s) :\n    BigStep (Stmt.assign x a, s) (s[x ↦ a s])\n  | seq (S T s t u) (hS : BigStep (S, s) t)\n      (hT : BigStep (T, t) u) :\n    BigStep (S; T, s) u\n  | if_true (B S T s t) (hcond : B s)\n      (hbody : BigStep (S, s) t) :\n    BigStep (Stmt.ifThenElse B S T, s) t\n  | if_false (B S T s t) (hcond : ¬ B s)\n      (hbody : BigStep (T, s) t) :\n    BigStep (Stmt.ifThenElse B S T, s) t\n  | while_true (B S s t u) (hcond : B s)\n      (hbody : BigStep (S, s) t)\n      (hrest : BigStep (Stmt.whileDo B S, t) u) :\n    BigStep (Stmt.whileDo B S, s) u\n  | while_false (B S s) (hcond : ¬ B s) :\n    BigStep (Stmt.whileDo B S, s) s\n\ninfix:110 \" ⟹ \" => BigStep",
   "statement": "theorem BigStep_while_Iff {B S s u} :\n    (Stmt.whileDo B S, s) ⟹ u ↔\n    (B s ∧ ∃t, (S, s) ⟹ t ∧ (Stmt.whileDo B S, t) ⟹ u)\n    ∨ (¬ B s ∧ u = s)",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "Iff.intro",
+    "BigStep.while_true",
+    "BigStep.while_false"
+  ],
   "notes": "From logical_verification_2025/lean/LoVe/LoVe09_OperationalSemantics_Demo.lean lines 399-425."
 }

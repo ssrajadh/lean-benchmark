@@ -16,6 +16,9 @@
   "open_namespaces": [],
   "preamble": "inductive BinTree (α : Type) where\n  | leaf : BinTree α\n  | branch : BinTree α → α → BinTree α → BinTree α\n\ndef BinTree.mirror : BinTree α → BinTree α\n  | .leaf => .leaf\n  | .branch l x r => .branch (mirror r) x (mirror l)\n\ndef BinTree.count : BinTree α → Nat\n  | .leaf => 0\n  | .branch l _ r => 1 + l.count + r.count",
   "statement": "theorem BinTree.mirror_count (t : BinTree α) :\n    t.mirror.count = t.count",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "BinTree.mirror",
+    "BinTree.count"
+  ],
   "notes": "From fp-lean/examples/Examples/Induction.lean lines 492-494."
 }

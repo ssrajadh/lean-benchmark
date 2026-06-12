@@ -47,7 +47,11 @@ def _classify_outcome(stdout: str, stderr: str, returncode: int) -> Outcome:
         return "compile_error"
     if re.search(r"unknown identifier|unknown constant|unknownIdentifier", combined, re.IGNORECASE):
         return "unknown_identifier"
-    if re.search(r"type mismatch|application type mismatch", combined, re.IGNORECASE):
+    if re.search(
+        r"type mismatch|application type mismatch"
+        r"|numerals are data",  # numeral supplied where a Prop/proof is expected
+        combined, re.IGNORECASE,
+    ):
         return "type_mismatch"
     if re.search(r"fail to show termination", combined):
         return "termination_failure"
@@ -59,9 +63,11 @@ def _classify_outcome(stdout: str, stderr: str, returncode: int) -> Outcome:
         r"tactic .* failed"
         r"|made no progress"
         r"|omega could not prove"
+        r"|linarith failed"  # linarith is a tactic, like omega
         r"|Case tag .* not found"
         r"|Alternative .* is not needed"
-        r"|No goals to be solved",
+        r"|No goals to be solved"
+        r"|Invalid target: Index",  # `induction` on an indexed relation; Lean says use `cases`
         combined, re.IGNORECASE,
     ):
         return "tactic_failed"

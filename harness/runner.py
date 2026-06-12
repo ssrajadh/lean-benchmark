@@ -52,22 +52,24 @@ def _extract_proof(text: str) -> str:
     return proof
 
 
-def _cache_path(model: str, ph: str) -> Path:
+def _cache_path(model: str, ph: str, sample_idx: int) -> Path:
     safe_model = model.replace("/", "_").replace(":", "_")
-    return CACHE_DIR / f"{safe_model}_{ph[:16]}.json"
+    # sample_idx is part of the key: samples 1-2 are drawn at T=0.6 and must
+    # not collapse onto sample 0's cached (T=0.0) response.
+    return CACHE_DIR / f"{safe_model}_{ph[:16]}_s{sample_idx}.json"
 
 
-def _load_cache(model: str, ph: str) -> ProviderResponse | None:
-    p = _cache_path(model, ph)
+def _load_cache(model: str, ph: str, sample_idx: int) -> ProviderResponse | None:
+    p = _cache_path(model, ph, sample_idx)
     if p.exists():
         return ProviderResponse.model_validate_json(p.read_text())
     return None
 
 
-def _save_cache(model: str, ph: str, resp: ProviderResponse) -> None:
+def _save_cache(model: str, ph: str, sample_idx: int, resp: ProviderResponse) -> None:
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     data = _sanitize(resp.model_dump())
-    _cache_path(model, ph).write_text(json.dumps(data))
+    _cache_path(model, ph, sample_idx).write_text(json.dumps(data))
 
 
 def _cell_key(ob_id: str, model: str, condition: str, sample_idx: int) -> str:
@@ -125,7 +127,7 @@ def _run_cell(
 
     ph = _prompt_hash(system, user)
 
-    cached = _load_cache(model, ph) if use_cache else None
+    cached = _load_cache(model, ph, sample_idx) if use_cache else None
     if cached is not None:
         provider_resp = cached
     else:
@@ -139,7 +141,7 @@ def _run_cell(
             seed=seed,
         )
         if provider_resp.error is None:
-            _save_cache(model, ph, provider_resp)
+            _save_cache(model, ph, sample_idx, provider_resp)
 
     if provider_resp.error:
         verif = VerificationResult(

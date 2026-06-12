@@ -14,6 +14,10 @@
   "open_namespaces": [],
   "preamble": "",
   "statement": "theorem Or_swap (a b : Prop) : a ∨ b → b ∨ a",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "Or.elim",
+    "Or.inr",
+    "Or.inl"
+  ],
   "notes": "From logical_verification_2025/lean/LoVe/LoVe03_BackwardProofs_Demo.lean lines 202-210."
 }

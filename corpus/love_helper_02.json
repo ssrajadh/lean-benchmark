@@ -15,6 +15,8 @@
   "open_namespaces": [],
   "preamble": "def mirror {α : Type} : Tree α → Tree α\n  | Tree.nil => Tree.nil\n  | Tree.node a l r => Tree.node a (mirror r) (mirror l)",
   "statement": "theorem mirror_mirror {α : Type} (t : Tree α) :\n    mirror (mirror t) = t",
-  "oracle_premises": [],
+  "oracle_premises": [
+    "mirror"
+  ],
   "notes": "From logical_verification_2025/lean/LoVe/LoVe05_FunctionalProgramming_Demo.lean lines 440-445."
 }
